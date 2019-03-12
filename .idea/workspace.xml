@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a77c7341-beac-49d0-90ca-83c3bfee568e" name="Default Changelist" comment="" />
+    <list default="true" id="a77c7341-beac-49d0-90ca-83c3bfee568e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +33,7 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sav_depot/services/client_service.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
@@ -38,6 +41,24 @@
               <folding>
                 <element signature="e#0#46#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.travis.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="8" lean-forward="true" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/requirements.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -63,6 +84,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -81,6 +105,7 @@
         <option value="$PROJECT_DIR$/sav_depot/__init__.py" />
         <option value="$PROJECT_DIR$/sav_depot/sav_model.py" />
         <option value="$PROJECT_DIR$/sav_depot/services/client_service.py" />
+        <option value="$PROJECT_DIR$/.travis.yml" />
       </list>
     </option>
   </component>
@@ -90,6 +115,7 @@
     <option name="width" value="974" />
     <option name="height" value="970" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -101,17 +127,6 @@
             <path>
               <item name="sav" type="b2602c69:ProjectViewProjectNode" />
               <item name="sav" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sav" type="462c0819:PsiDirectoryNode" />
-              <item name="sav_depot" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sav" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sav" type="462c0819:PsiDirectoryNode" />
-              <item name="sav_depot" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -198,6 +213,21 @@
       <option name="presentableId" value="Default" />
       <updated>1551977625234</updated>
     </task>
+    <task id="LOCAL-00001" summary="travis">
+      <created>1552378324712</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1552378324712</updated>
+    </task>
+    <task id="LOCAL-00002" summary="travis">
+      <created>1552379060658</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1552379060658</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -213,7 +243,7 @@
     <frame x="-7" y="40" width="974" height="970" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49825785" visible="true" weight="0.18589744" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49825785" visible="true" weight="0.18589744" />
       <window_info id="Structure" order="1" sideWeight="0.5017422" side_tool="true" weight="0.12328767" />
       <window_info id="Favorites" order="2" sideWeight="0.5017422" side_tool="true" weight="0.12328767" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -231,6 +261,10 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="travis" />
+    <option name="LAST_COMMIT_MESSAGE" value="travis" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/Desktop/get-pip.py">
@@ -251,13 +285,6 @@
     <entry file="file://$PROJECT_DIR$/sav_depot/model/produit.py" />
     <entry file="file://$PROJECT_DIR$/sav_depot/model/__init.py" />
     <entry file="file://$PROJECT_DIR$/sav_depot/services/sav.db" />
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -332,6 +359,20 @@
           <folding>
             <element signature="e#0#46#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="8" lean-forward="true" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
         </state>
       </provider>
     </entry>

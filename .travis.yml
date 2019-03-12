@@ -1,2 +1,4 @@
 language: python
 /usr/bin/env python
+install:
+  - pip install -r requirements.txt
