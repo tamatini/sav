@@ -1,6 +1,6 @@
 from flask_restplus import Resource, Namespace, fields
 from sav_depot.sav_model import Client, db
-from flask import request
+from flask import request, jsonify
 
 
 api = Namespace('Client', description='les clients')
@@ -18,7 +18,7 @@ class ClientList(Resource):
         return [{'Nom': c.nom_client, 'Prenom': c.prenom_client} for c in Client.query.all()]
 
     @api.expect(new_client)
-    def put(self):
+    def post(self):
         nom = request.json['nom']
         prenom = request.json['prenom']
         tel = request.json['tel']
@@ -26,7 +26,7 @@ class ClientList(Resource):
         client = Client(nom_client=nom, prenom_client=prenom, tel_client=tel, mail_client=mail)
         db.session.add(client)
         db.session.commit()
-
+        return jsonify('Le client '+nom + ' ' + prenom + ' à bien été créer')
 
 
 @api.route('/'+'<string:client_id>')
