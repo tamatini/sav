@@ -1,16 +1,32 @@
-from flask_restplus import Resource, Namespace
-from sav_depot.sav_model import Client
+from flask_restplus import Resource, Namespace, fields
+from sav_depot.sav_model import Client, db
+from flask import request
 
 
 api = Namespace('Client', description='les clients')
-client_list = [{'nom': 'TEAHUI', 'prenom': 'Tamatini', 'n°tel': '87 44 44 44'}]
+new_client = api.model('Client', {
+    'nom': fields.String,
+    'prenom': fields.String,
+    'tel': fields.String,
+    'mail': fields.String
+})
 
 
 @api.route('/')
 class ClientList(Resource):
     def get(self):
-       return [{'Nom': c.nom_client, 'Prénom': c.prenom_client,
-                'Tel': c.tel_client, 'Mail': c.mail_client} for c in Client.query.all()]
+        return [{'Nom': c.nom_client, 'Prenom': c.prenom_client} for c in Client.query.all()]
+
+    @api.expect(new_client)
+    def put(self):
+        nom = request.json['nom']
+        prenom = request.json['prenom']
+        tel = request.json['tel']
+        mail = request.json['mail']
+        client = Client(nom_client=nom, prenom_client=prenom, tel_client=tel, mail_client=mail)
+        db.session.add(client)
+        db.session.commit()
+
 
 
 @api.route('/'+'<string:client_id>')
