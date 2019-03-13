@@ -3,4 +3,4 @@ from sav_depot import app
 
 api.init_app(app)
 app.run(debug=True)
-
+app.register_blueprint(api.routes)

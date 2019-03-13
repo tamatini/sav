@@ -2,7 +2,8 @@ from flask_restplus import Resource, Namespace, fields
 from sav_depot.sav_model import Client, db
 from flask import request, jsonify
 
-api = Namespace('Client', description='les clients')
+
+api = Namespace('Client', description='Les clients')
 
 new_client = api.model('new_client', {
     'nom': fields.String,
