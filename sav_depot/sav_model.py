@@ -6,8 +6,8 @@ class Client(db.Model):
     client_id = db.Column(db.Integer, primary_key=True)
     nom_client = db.Column(db.String(20), nullable=False, unique=False)
     prenom_client = db.Column(db.String(20), nullable=False, unique=False)
-    tel_client = db.Column(db.String(20), nullable=False, unique=True)
-    mail_client = db.Column(db.String(30), nullable=True, unique=True)
+    tel_client = db.Column(db.String(20), nullable=False, unique=False)
+    mail_client = db.Column(db.String(30), nullable=True, unique=False)
 
 
 class Produit(db.Model):

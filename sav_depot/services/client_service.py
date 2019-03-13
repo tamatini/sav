@@ -2,11 +2,16 @@ from flask_restplus import Resource, Namespace, fields
 from sav_depot.sav_model import Client, db
 from flask import request, jsonify
 
-
 api = Namespace('Client', description='les clients')
-new_client = api.model('Client', {
+
+new_client = api.model('new_client', {
     'nom': fields.String,
     'prenom': fields.String,
+    'tel': fields.String,
+    'mail': fields.String
+})
+
+update_client = api.model('update_client', {
     'tel': fields.String,
     'mail': fields.String
 })
@@ -23,16 +28,40 @@ class ClientList(Resource):
         prenom = request.json['prenom']
         tel = request.json['tel']
         mail = request.json['mail']
-        client = Client(nom_client=nom, prenom_client=prenom, tel_client=tel, mail_client=mail)
-        db.session.add(client)
-        db.session.commit()
+        if Client.query.filter_by(nom_client=nom, prenom_client=prenom).first():
+            return jsonify('Ce client est déjà enregistrer')
+        else:
+            client = Client(nom_client=nom, prenom_client=prenom, tel_client=tel, mail_client=mail)
+            db.session.add(client)
+            db.session.commit()
         return jsonify('Le client '+nom + ' ' + prenom + ' à bien été créer')
 
 
-@api.route('/'+'<string:client_id>')
+@api.route('/'+'<string:nom_id>'+' '+'<string:prenom_id>')
 class ClientDetail(Resource):
-    def get(self, client_id):
-        nom = Client.query.filter_by(nom_client=client_id)
-        prenom = Client.query.filter_by(prenom_client=client_id)
-        return [{'Nom': c.nom_client, 'Prénom': c.prenom_client} for c in nom] or \
-               [{'Nom': c.nom_client, 'Prénom': c.prenom_client} for c in prenom]
+    def get(self, prenom_id, nom_id):
+        return [{'nom': c.nom_client, 'prenom': c.prenom_client, 'tel': c.tel_client, 'mail': c.mail_client}
+                for c in Client.query.filter_by(nom_client=nom_id, prenom_client=prenom_id)]
+
+    def delete(self, prenom_id, nom_id):
+        client = Client.query.filter_by(nom_client=nom_id, prenom_client=prenom_id)
+        db.session.delete(client)
+        db.session.commit()
+
+    @api.expect(update_client)
+    def put(self, prenom_id, nom_id):
+        tel = request.json['tel']
+        mail = request.json['mail']
+        if Client.query.filter_by(nom_client=nom_id, prenom_client=prenom_id).first():
+            client_id = Client.query.filter_by(nom_client=nom_id, prenom_client=prenom_id).first()
+            client_id.tel_client = tel
+            client_id.mail_client = mail
+            db.session.commit()
+            return [{'Nom': c.nom_client, 'Prénom': c.prenom_client, 'tel': c.tel_client,
+                    'mail': c.mail_client} for c in
+                    Client.query.filter_by(nom_client=nom_id, prenom_client=prenom_id)]
+        else:
+            return jsonify("Ce client n'existe pas dans la base de données")
+
+
+

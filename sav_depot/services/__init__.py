@@ -1,4 +1,4 @@
-from flask_restplus import Api
+from flask_restplus import Api, fields
 from .client_service import api as client_api
 
 
