@@ -3,13 +3,13 @@ from datetime import date
 
 
 class Client(db.Model):
-    db.__tablename__ = "client_sav"
+    db.__tablename__ = "client"
     client_id = db.Column(db.Integer, primary_key=True)
     nom_client = db.Column(db.String(20), nullable=False, unique=False)
     prenom_client = db.Column(db.String(20), nullable=False, unique=False)
     tel_client = db.Column(db.String(20), nullable=False, unique=False)
     mail_client = db.Column(db.String(30), nullable=True, unique=False)
-    sav = db.relationship("DepotSav", backref="depot")
+    sav = db.relationship("DepotSav", backref="depotsav")
 
     def __repr__(self):
         return f"Client('{self.nom_client}, '{self.prenom_client}', {self.tel_client}', '{self.mail_client}')"
@@ -40,16 +40,15 @@ class Marque(db.Model):
 class DepotSav(db.Model):
     db.__tablename__ = "depotsav"
     depot_id = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
-    client = db.Column(db.String(40), db.ForeignKey('client.nom_client'),db.ForeignKey('client.prenom_client'),
-                       nullable=False, unique=False)
+    client_id = db.Column(db.Integer, db.ForeignKey('client.client_id'))
     produit = db.Column(db.String(50), db.ForeignKey('produit.nom_produit'), nullable=True)
     date_depot = db.Column(db.DateTime, nullable=False, unique=False, default=date)
     date_achat = db.Column(db.DateTime, nullable=False, unique=False)
-    magasin = db.relationship("Magasin", backref="magasin")
+    magasin = db.Column(db.Integer, db.ForeignKey('magasin.magasin_id'))
     situation = db.Column(db.Integer, db.ForeignKey('situation.situation'), nullable=False)
 
     def __repr__(self):
-        return f"Client('{self.client}, '{self.produit}', {self.date_depot}', '{self.date_achat}', '{self.magasin}')"
+        return f"DepotSav('{self.produit}', {self.date_depot}', '{self.date_achat}', '{self.magasin}')"
 
 
 class Magasin(db.Model):
