@@ -4,12 +4,8 @@ from flask import request, jsonify
 
 api = Namespace('Marque', description='Les marques de produit')
 
-MARQUE_LIST = {
-    'nom_marque': 'Samsung',
 
-}
-
-new_marque = api.model('new_client', {
+new_marque = api.model('new_marque', {
     'nom_marque': fields.String
 })
 
