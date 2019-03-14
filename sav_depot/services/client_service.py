@@ -1,5 +1,5 @@
 from flask_restplus import Resource, Namespace, fields
-from sav_depot.sav_model import Client, db
+from sav_depot.sav_model import Client, DepotSav, Magasin, Marque, Situation, db
 from flask import request, jsonify
 
 
