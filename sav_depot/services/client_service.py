@@ -21,7 +21,7 @@ update_client = api.model('update_client', {
 @api.route('/')
 class ClientList(Resource):
     def get(self):
-        return [{'Nom': c.nom_client, 'Prenom': c.prenom_client} for c in Client.query.all()]
+        return [{'ID': c.client_id, 'Nom': c.nom_client, 'Prenom': c.prenom_client} for c in Client.query.all()]
 
     @api.expect(new_client)
     def post(self):

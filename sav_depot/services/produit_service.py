@@ -16,7 +16,8 @@ new_produit = api.model('new_produit', {
 @api.route('/')
 class ProduitList(Resource):
     def get(self):
-        return [{'nom_produit': c.nom_produit, 'ean_produit': c.ean_produit} for c in Produit.query.all()]
+        return [{'nom_produit': c.nom_produit, 'ean_produit': c.ean_produit,
+                 'pv_produit': c.pv_produit, 'marque_produit': c.marque_produit} for c in Produit.query.all()]
 
     @api.expect(new_produit)
     def post(self):
