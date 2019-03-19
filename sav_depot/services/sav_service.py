@@ -1,8 +1,7 @@
 from flask_restplus import Resource, Namespace, fields
-from sav_depot.sav_model import DepotSav, Client, db
+from sav_depot.sav_model import Client
 from flask import request, jsonify
-
-
+from sav_depot import db
 api = Namespace('SAV', description='Les dépots SAV')
 
 new_depot = api.model('new_depot', {

@@ -1,6 +1,7 @@
 from flask_restplus import Resource, Namespace, fields
-from sav_depot.sav_model import Marque, db
+from sav_depot.sav_model import Marque
 from flask import request, jsonify
+from sav_depot import db
 
 api = Namespace('Marque', description='Les marques de produit')
 

@@ -1,7 +1,7 @@
 from flask_restplus import Resource, Namespace, fields
-from sav_depot.sav_model import Client, DepotSav, Magasin, Marque, Situation, db
+from sav_depot.sav_model import Client
 from flask import request, jsonify
-
+from sav_depot import db
 
 api = Namespace('Client', description='Les clients')
 
@@ -45,9 +45,11 @@ class ClientDetail(Resource):
                 for c in Client.query.filter_by(nom_client=nom_id, prenom_client=prenom_id)]
 
     def delete(self, prenom_id, nom_id):
-        client = Client.query.filter_by(nom_client=nom_id, prenom_client=prenom_id)
-        db.session.delete(client)
+        client = Client.query.filter_by(nom_client=nom_id, prenom_client=prenom_id).first()
+        client_delete = client.query.get(client.client_id)
+        db.session.delete(client_delete)
         db.session.commit()
+        return jsonify('Le client '+ nom_id + ' ' + prenom_id + ' à été supprimer')
 
     @api.expect(update_client)
     def put(self, prenom_id, nom_id):
