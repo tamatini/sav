@@ -12,7 +12,8 @@ class Client(db.Model):
     sav = db.relationship("DepotSav", backref="depotsav")
 
     def __repr__(self):
-        return f"Client('{self.client_id}''{self.nom_client}, '{self.prenom_client}', {self.tel_client}', '{self.mail_client}')"
+        return f"Client('{self.client_id}''{self.nom_client}, '{self.prenom_client}', " \
+            f"{self.tel_client}', '{self.mail_client}')"
 
 
 class Produit(db.Model):

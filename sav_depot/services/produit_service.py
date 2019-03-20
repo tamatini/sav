@@ -16,8 +16,9 @@ new_produit = api.model('new_produit', {
 @api.route('/')
 class ProduitList(Resource):
     def get(self):
-        return [{'nom_produit': c.nom_produit, 'ean_produit': c.ean_produit,
-                 'pv_produit': c.pv_produit, 'marque_produit': c.marque_produit} for c in Produit.query.all()]
+        return [{'nom_produit': c.nom_produit.capitalize(), 'ean_produit': c.ean_produit,
+                 'pv_produit': str(c.pv_produit)+' Fcp', 'marque_produit': c.marque_produit.upper()}
+                for c in Produit.query.all()]
 
     @api.expect(new_produit)
     def post(self):
@@ -25,45 +26,40 @@ class ProduitList(Resource):
         ean_produit = request.json['ean_produit']
         pv_produit = request.json['pv_produit']
         marque_produit = request.json['marque_produit']
-        if Produit.query.filter_by(nom_produit=nom_produit, ean_produit=ean_produit).first():
+        if Produit.query.filter_by(nom_produit=nom_produit.lower(), ean_produit=ean_produit).first():
             return jsonify('Ce produit existe déjà')
-        elif Marque.query.filter_by(marque_produit=marque_produit).first():
-            marques = Marque.query.filter_by(marque_produit=marque_produit)
-            marque_product = marques.marque_produit
-            produit = Produit(nom_produit=nom_produit, ean_produit=ean_produit,
-                              pv_produit=pv_produit, marque_produit=marque_product)
-            db.session.add(produit)
-            db.session.commit()
-            return jsonify('le produit à été créer')
         else:
-            marque = Marque(marque_produit=marque_produit)
-            marques = Marque.query.filter_by(marque_produit=marque_produit)
-            marque_product = marques.marque_produit
-            produit = Produit(nom_produit=nom_produit, ean_produit=ean_produit,
-                              pv_produit=pv_produit, marque_produit=marque_product)
-            db.session.add(marque)
-            db.session.add(produit)
-            db.session.commit()
-            return jsonify('La marque à été ajouter'), jsonify('Le produit à été rajouter')
+            produit = Produit(nom_produit=nom_produit.lower(), ean_produit=ean_produit,
+                              pv_produit=pv_produit, marque_produit=marque_produit.lower())
+            if Marque.query.filter_by(marque_produit=marque_produit.lower()).first():
+                db.session.add(produit)
+                db.session.commit()
+                return jsonify('Cette marque existe déjà, le produit à été créer')
+
+            else:
+                marque = Marque(marque_produit=marque_produit.lower())
+                db.session.add(marque, produit)
+                db.session.commit()
+        return jsonify('la marque et le produit ont été créer')
 
 
 @api.route('/'+'<string:produit_id>')
 class ProduitDetail(Resource):
     def get(self, produit_id):
-        return [{'Produit': c.nom_produit, 'ean': c.ean_produit, 'marque': c.marque_produit}
-                for c in Produit.query.filter_by(nom_produit=produit_id)] or \
-               [{'Produit': c.nom_produit, 'ean': c.ean_produit, 'marque': c.marque_produit}
+        return [{'Produit': c.nom_produit.capitalize(), 'ean': c.ean_produit,
+                 'pv_produit': str(c.pv_produit)+' Fcp', 'marque': c.marque_produit.upper()}
+                for c in Produit.query.filter_by(nom_produit=produit_id.lower())] or \
+               [{'Produit': c.nom_produit.capitalize(), 'ean': c.ean_produit,
+                 'pv_produit': str(c.pv_produit)+' Fcp','marque': c.marque_produit.upper()}
                 for c in Produit.query.filter_by(ean_produit=produit_id)]
 
     def delete(self, produit_id):
-        if Produit.query.filter_by(nom_produit=produit_id):
-            produit = Produit.query.filter_by(nom_produit=produit_id).first()
+        if Produit.query.filter_by(nom_produit=produit_id.lower()):
+            produit = Produit.query.filter_by(nom_produit=produit_id.lower()).first()
             produit_delete = produit.query.get(produit.produit_id)
             db.session.delete(produit_delete)
             db.session.commit()
-            return jsonify('Le produit ' + produit_id + ' à été supprimer')
-        else:
-            return jsonify("Ce produit n'existe pas")
+        return jsonify('Le produit ' + produit_id.capitalize() + ' à été supprimer')
 
 
 
