@@ -4,12 +4,12 @@ from datetime import date
 
 class Client(db.Model):
     db.__tablename__ = "client"
+    db.__mapper__ = {'column_prefix': 'client'}
     client_id = db.Column(db.Integer, primary_key=True)
     nom_client = db.Column(db.String(20), nullable=False, unique=False)
     prenom_client = db.Column(db.String(20), nullable=False, unique=False)
     tel_client = db.Column(db.String(20), nullable=False, unique=False)
     mail_client = db.Column(db.String(30), nullable=True, unique=False)
-    sav = db.relationship("DepotSav", backref="depotsav")
 
     def __repr__(self):
         return f"Client('{self.client_id}''{self.nom_client}, '{self.prenom_client}', " \
@@ -18,6 +18,7 @@ class Client(db.Model):
 
 class Produit(db.Model):
     db.__tablename__ = "produit"
+    db.__mapper__ = {'column_prefix': 'produit'}
     produit_id = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
     nom_produit = db.Column(db.String(20), nullable=False, unique=True)
     marque_produit = db.Column(db.String(20), db.ForeignKey('marque.marque_produit'), nullable=False)
@@ -30,6 +31,7 @@ class Produit(db.Model):
 
 class Marque(db.Model):
     db.__tablename__ = "marque"
+    db.__mapper__ = {'column_prefix': 'marque'}
     marque_id = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
     marque_produit = db.Column(db.String(25), nullable=False, unique=True)
     produits = db.relationship("Produit", backref="produit")
@@ -40,13 +42,10 @@ class Marque(db.Model):
 
 class DepotSav(db.Model):
     db.__tablename__ = "depotsav"
+    db.__mapper__ = {'column_prefix': 'depotsav'}
     depot_id = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
-    client_id = db.Column(db.Integer, db.ForeignKey('client.client_id'))
-    produit = db.Column(db.String(50), db.ForeignKey('produit.nom_produit'), nullable=True)
-    date_depot = db.Column(db.DateTime, nullable=False, unique=False, default=date)
-    date_achat = db.Column(db.DateTime, nullable=False, unique=False)
-    magasin = db.Column(db.Integer, db.ForeignKey('magasin.magasin_id'))
-    situation = db.Column(db.Integer, db.ForeignKey('situation.situation'), nullable=False)
+    date_depot = db.Column(db.String, nullable=False, unique=False, default=date)
+    date_achat = db.Column(db.String, nullable=False, unique=False)
 
     def __repr__(self):
         return f"DepotSav('{self.produit}', {self.date_depot}', '{self.date_achat}', '{self.magasin}')"
@@ -54,6 +53,7 @@ class DepotSav(db.Model):
 
 class Magasin(db.Model):
     db.__tablename__ = "magasin"
+    db.__mapper__ = {'column_prefix': 'magasin'}
     magasin_id = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
     nom_magasin = db.Column(db.String(30), nullable=False, unique=True)
 
@@ -63,6 +63,7 @@ class Magasin(db.Model):
 
 class Situation(db.Model):
     db.__tablename__ = "Situation"
+    db.__mapper__ = {'column_prefix': 'situation'}
     situation_id = db.Column(db.Integer, nullable=False, unique=True, primary_key=True)
     situation = db.Column(db.String, nullable=False, unique=True)
 

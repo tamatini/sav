@@ -50,16 +50,19 @@ class ProduitDetail(Resource):
                  'pv_produit': str(c.pv_produit)+' Fcp', 'marque': c.marque_produit.upper()}
                 for c in Produit.query.filter_by(nom_produit=produit_id.lower())] or \
                [{'Produit': c.nom_produit.capitalize(), 'ean': c.ean_produit,
-                 'pv_produit': str(c.pv_produit)+' Fcp','marque': c.marque_produit.upper()}
+                 'pv_produit': str(c.pv_produit)+' Fcp', 'marque': c.marque_produit.upper()}
                 for c in Produit.query.filter_by(ean_produit=produit_id)]
 
     def delete(self, produit_id):
-        if Produit.query.filter_by(nom_produit=produit_id.lower()):
-            produit = Produit.query.filter_by(nom_produit=produit_id.lower()).first()
+        if Produit.query.filter_by(ean_produit=produit_id).first():
+            produit = Produit.query.filter_by(ean_produit=produit_id).first()
             produit_delete = produit.query.get(produit.produit_id)
             db.session.delete(produit_delete)
             db.session.commit()
-        return jsonify('Le produit ' + produit_id.capitalize() + ' à été supprimer')
-
-
+        elif Produit.query.filter_by(nom_produit=produit_id).first():
+            produit = Produit.query.filter_by(nom_produit=produit_id).first()
+            produit_delete = produit.query.get(produit.produit_id)
+            db.session.delete(produit_delete)
+            db.session.commit()
+        return jsonify('Le produit ' + produit.nom_produit.capitalize() + ' à été supprimer')
 

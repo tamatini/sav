@@ -6,10 +6,10 @@ from sav_depot import db
 api = Namespace('Client', description='Les clients')
 
 new_client = api.model('new_client', {
-    'nom': fields.String,
-    'prenom': fields.String,
-    'tel': fields.String,
-    'mail': fields.String
+    'Nom': fields.String,
+    'Prénom': fields.String,
+    'Tel': fields.String,
+    'Mail': fields.String
 })
 
 update_client = api.model('update_client', {
@@ -21,8 +21,9 @@ update_client = api.model('update_client', {
 @api.route('/')
 class ClientList(Resource):
     def get(self):
-        return [{'ID': c.client_id, 'Nom': c.nom_client.upper(), 'Prénom': c.prenom_client.capitalize()}
-                for c in Client.query.all()]
+        client = [{'ID': c.client_id, 'Nom': c.nom_client.upper(), 'Prénom': c.prenom_client.capitalize()}
+                  for c in Client.query.all()]
+        return client
 
     @api.expect(new_client)
     def post(self):
